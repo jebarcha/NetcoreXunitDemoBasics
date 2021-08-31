@@ -92,6 +92,36 @@ namespace Calculations.Tests
             Assert.Equal(expectedCollection, calc.FiboList);
         }
 
+        [Fact]
+        public void IsOdd_GivenOddValue_ReturnsTrue()
+        {
+            var calc = _calculatorFixture.Calc;
+            var result = calc.IsOdd(1);
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void IsEven_GivenEvenValue_ReturnsFalse()
+        {
+            var calc = _calculatorFixture.Calc;
+            var result = calc.IsOdd(2);
+            Assert.False(result);
+        }
+
+        [Theory]
+        [IsOddOrEvenData]
+        //[MemberData(nameof(TestDataShare.IsOddOrEvenExternalData), MemberType = typeof(TestDataShare))]
+        //[MemberData(nameof(TestDataShare.IsOddOrEvenData), MemberType = typeof(TestDataShare))]
+        //[InlineData(1, true)]
+        //[InlineData(2, false)]
+        public void IsOdd_TestOddAndEven(int value, bool expected)
+        {
+            var calc = _calculatorFixture.Calc;
+            var result = calc.IsOdd(value);
+            Assert.Equal(expected, result);
+        }
+
+
         public void Dispose()
         {
             memoryStream.Close();
